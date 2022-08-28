@@ -5,17 +5,27 @@
 	export let card: any;
 </script>
 
-<div class="card card-side bg-base-100 shadow-xl w-full">
-	<figure><img src={card.pictureUrl} loading="lazy" class="lg:h-52 h-40" alt="Movie" /></figure>
-	<div class="card-body">
+<div class="flex flex-col justify-center items-center">
+	<a href={`https://rules.art/card/${card.slug}`} target="_blank"><img src={card.pictureUrl} loading="lazy" class="lg:h-48 md:h-40 h-32 img rounded-xl cursor-pointer" alt="Movie" /></a>
+	<div class="flex flex-col justify-center items-center lg:text-sm text-xs">
 		<div class="flex flex-row items-center space-x-2">
-			<h2 class="card-title">{card.artist.displayName}</h2>
+			<h2 class="font-semibold">{card.artist.displayName}</h2>
 			{#if card.slug.includes('common')}
 				<div class="badge badge-primary">Commune</div>
 			{:else}
-				<div class="badge">Platine</div>
+				<div class="badge bg-slate-400 text-black">Platine</div>
 			{/if}
 		</div>
-		<div>Saison {card.season}</div>
+		<p>{card.cardsMintedCount} obtenues</p>
+		<p class="italic">Saison {card.season}</p>
 	</div>
 </div>
+
+<style>
+    .img{
+        transition: transform 100ms;
+    }
+    .img:hover{
+        transform: perspective(400px) rotateY(10deg);
+    }
+</style>

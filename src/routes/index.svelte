@@ -6,7 +6,6 @@
 	import Translation from '$lib/components/Translation.svelte';
 	import Spinner from '$lib/assets/spinner.png';
 	import Discord from '$lib/assets/discord.svg';
-	import PackBg from '$lib/assets/pack-bg.svg';
 	import Pack from '$lib/components/Pack.svelte';
 	import Card from '$lib/components/Card.svelte';
 
@@ -112,9 +111,8 @@
 {#if loading}
 	<img src={Spinner} class="animate-spin h-10" alt="spinner" />
 {:else}
-	<img src={PackBg} class="absolute left-0 right-auto bg-repeat top-11 opacity-20 bottom-auto z-0" alt="pack-bg" />
-	<div class="flex flex-col w-full space-y-3">
-		<div class="stats stats-horizontal bg-primary z-10 overflow-y-hidden">
+	<div class="flex flex-col w-full space-y-3 z-10">
+		<div class="stats stats-horizontal bg-primary overflow-y-hidden">
 			<div class="stat w-[20rem]">
 				<div class=" stat-title">
 					Contribution
@@ -123,7 +121,7 @@
 					{Math.round($totalMoneyProgress * 100) / 100}€
 				</div>
 				<div class="stat-desc">
-					Reversés à {numberOfCards} artistes indés !
+					Reversés à {numberOfCards === 0 ? '(loading...)' : numberOfCards} artistes indés !
 					<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalMoneyProgress / totalMoney) - 0.3)) * 100}; --size:2rem; --thickness: 0.5rem;`}>
 					</div>
 				</div>
@@ -155,22 +153,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex flex-row space-x-3 flex-shrink">
-			<div class="glass rounded p-3 h-full w-3/5">
+		<div class="flex lg:flex-row flex-col space-x-3 flex-shrink">
+			<div class="bg-base-100 rounded p-3 h-full lg:w-3/5 w-full">
 				{#if loadingCards}
 					<img src={Spinner} class="animate-spin h-10" alt="spinner" />
 				{:else}
 					<h1 class="font-semibold">{allCards.length} cartes !</h1>
-					<div class="flex flex-col space-y-3 h-full overflow-y-auto">
+					<div class="grid lg:grid-cols-4 overflow-x-hidden md:grid-cols-3 grid-cols-2 space-x-3 space-y-5 h-[30rem] rounded overflow-y-auto">
 						{#each allCards as card}
 							<Card {card}/>
 						{/each}
 					</div>
 				{/if}
 			</div>
-			<div class="flex flex-col items-center space-y-2 glass rounded p-3 w-2/5">
+			<div class="flex flex-col items-center space-y-2 glass rounded p-3 lg:w-2/5 w-[95%]">
 				<h1 class="font-semibold text-xl">Packs</h1>
-				<div class="flex flex-row space-x-4">
+				<div class="grid grid-cols-2 space-x-4 space-y-3 h-[30rem] rounded overflow-y-auto">
 					{#each packs as pack}
 						<Pack {pack}/>
 					{/each}
