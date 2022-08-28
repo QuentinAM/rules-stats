@@ -15,32 +15,21 @@ export default function GetAllCardModels() {
 			body: JSON.stringify({
 				query: `
                 query{
-                    allCardModels{
-                        slug,
-                        pictureUrl,
-                        artist{
-                          displayName
-                        },
-                        season
-                    }
-                }`
+					allCardModels{
+						slug,
+						pictureUrl,
+						artist{
+						  displayName
+						},
+						season,
+						cardsMintedCount,
+					}
+				}`
 			})
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				const array = res.data.allCardModels;
-
-				// Remove dublet cards with same artist.displayName
-				const uniqueArray = array
-					.filter((item, index) => {
-						return (
-							array.findIndex(
-								({ artist: { displayName } }) => displayName === item.artist.displayName
-							) === index
-						);
-					});
-
-				resolve(uniqueArray);
+				resolve(res.data.allCardModels);
 			});
 	});
 }

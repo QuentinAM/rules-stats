@@ -8,8 +8,10 @@
 	import Discord from '$lib/assets/discord.svg';
 	import PackBg from '$lib/assets/pack-bg.svg';
 	import Pack from '$lib/components/Pack.svelte';
+	import Card from '$lib/components/Card.svelte';
 
 	let loading: boolean = true;
+	let loadingCards: boolean = true;
 	let allCards: any[] = [];
 	let packs: any[] = [];
 
@@ -22,37 +24,47 @@
 	// Socials
 	let approximate_member_count: number = 0;
 
-	// Stats progress
+	// Progress
 	const totalPacksProgress = tweened(0, {
-		duration: 6000,
+		duration: 4500,
 		easing: quadOut
 	});
 	const totalCardsProgress = tweened(0, {
-		duration: 9000,
+		duration: 6000,
 		easing: quadOut
 	});
 	const totalMoneyProgress = tweened(0, {
 		duration: 3000,
 		easing: quadOut
 	});
+	const discordCount = tweened(0, {
+		duration: 3000,
+		easing: quadOut
+	}); 
 
 	onMount(async () => {
-		// Cards
-		let res: any = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/cards`);
-		res = await res.json();
-		allCards = res;
-		numberOfCards = res.length;
-		loading = false;
+		let res: any;
+
+		// Cards async
+		fetch(`${dev ? 'http://localhost:3000' : ''}/api/cards`)
+		.then((response) => response.json())
+		.then((data) => {
+			allCards = data;
+			numberOfCards = data.length / 2;
+			loadingCards = false;
+		});
 
 		// Packs
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/launch-pack-s1`)
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3MvbGF1bmNoLXBhY2stczEucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMjAsImZpdCI6ImNvbnRhaW4ifX19';
+		res.link = 'https://rules.art/pack/launch-pack-s1';
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/starter-pack-s1`)
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3Mvc3RhcnRlci1wYWNrLXMxLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NTEyLCJmaXQiOiJjb250YWluIn19fQ==';
+		res.link = 'https://rules.art/pack/starter-pack-s1';
 		packs = [...packs, res];
 		console.log(packs);
 
@@ -71,12 +83,13 @@
 				totalMoneyProgress.set(totalMoney);
 			}
 		});
+		loading = false;
 
 		// Socials
 		fetch(`https://discord.com/api/v9/invites/DrfezKYUhH?with_counts=true&with_expiration=true`)
 		.then(res => res.json())
 		.then(res => {
-			approximate_member_count = res.approximate_member_count;
+			discordCount.set(res.approximate_member_count);
 		}).catch(err => {
 			console.log(err);
 		});
@@ -100,53 +113,76 @@
 	<img src={Spinner} class="animate-spin h-10" alt="spinner" />
 {:else}
 	<img src={PackBg} class="absolute left-0 right-auto bg-repeat top-11 opacity-20 bottom-auto z-0" alt="pack-bg" />
-	<div class="stats stats-horizontal bg-primary w-[60rem] z-10 overflow-y-hidden">
-		<div class="stat w-[20rem]">
-			<div class=" stat-title">
-				Contribution
+	<div class="flex flex-col w-full space-y-3">
+		<div class="stats stats-horizontal bg-primary z-10 overflow-y-hidden">
+			<div class="stat w-[20rem]">
+				<div class=" stat-title">
+					Contribution
+				</div>
+				<div class="stat-value">
+					{Math.round($totalMoneyProgress * 100) / 100}€
+				</div>
+				<div class="stat-desc">
+					Reversés à {numberOfCards} artistes indés !
+					<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalMoneyProgress / totalMoney) - 0.3)) * 100}; --size:2rem; --thickness: 0.5rem;`}>
+					</div>
+				</div>
 			</div>
-			<div class="stat-value">
-				{Math.round($totalMoneyProgress * 100) / 100}€
+			<div class="stat w-[20rem]">	
+				<div class="stat-title">
+					Packs
+				</div>
+				<div class="stat-value">
+					{Math.round($totalPacksProgress)}
+				</div>
+				<div class="stat-desc">
+					Exemplaires vendus !
+					<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalPacksProgress / totalPacks) - 0.2)) * 100}; --size:2rem; --thickness: 0.5rem;`}>
+					</div>
+				</div>
 			</div>
-			<div class="stat-desc">
-				Reversés à {numberOfCards} artistes indés !
-				<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalMoneyProgress / totalMoney) - 0.3)) * 100}; --size:12rem; --thickness: 0.5rem;`}>
+			<div class="stat w-[20rem]">
+				<div class="stat-title">
+					Cartes
+				</div>	
+				<div class="stat-value">
+					{Math.round($totalCardsProgress)}
+				</div>
+				<div class="stat-desc">
+					Cartes possédées !
+					<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalCardsProgress / totalCards) - 0.1)) * 100}; --size:2rem; --thickness: 0.5rem;`}>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="stat w-[20rem]">	
-			<div class="stat-title">
-				Packs
+		<div class="flex flex-row space-x-3 flex-shrink">
+			<div class="glass rounded p-3 h-full w-3/5">
+				{#if loadingCards}
+					<img src={Spinner} class="animate-spin h-10" alt="spinner" />
+				{:else}
+					<h1 class="font-semibold">{allCards.length} cartes !</h1>
+					<div class="flex flex-col space-y-3 h-full overflow-y-auto">
+						{#each allCards as card}
+							<Card {card}/>
+						{/each}
+					</div>
+				{/if}
 			</div>
-			<div class="stat-value">
-				{Math.round($totalPacksProgress)}
-			</div>
-			<div class="stat-desc">
-				Exemplaires vendus !
-				<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalPacksProgress / totalPacks) - 0.2)) * 100}; --size:12rem; --thickness: 0.5rem;`}>
-				</div>
-			</div>
-		</div>
-		<div class="stat w-[20rem]">
-			<div class="stat-title">
-				Cartes
-			</div>	
-			<div class="stat-value">
-				{Math.round($totalCardsProgress)}
-			</div>
-			<div class="stat-desc">
-				Cartes possédées !
-				<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalCardsProgress / totalCards) - 0.1)) * 100}; --size:12rem; --thickness: 0.5rem;`}>
+			<div class="flex flex-col items-center space-y-2 glass rounded p-3 w-2/5">
+				<h1 class="font-semibold text-xl">Packs</h1>
+				<div class="flex flex-row space-x-4">
+					{#each packs as pack}
+						<Pack {pack}/>
+					{/each}
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="flex flex-col items-center space-y-2 glass rounded p-3">
-		<h1 class="font-semibold text-xl">Packs</h1>
-		<div class="flex flex-row space-x-4">
-			{#each packs as pack}
-				<Pack {pack}/>
-			{/each}
+		<h1 class="font-semibold text-xl">Socials</h1>
+		<div class="flex flex-row items-center space-x-2">
+			<a href="https://discord.com/invite/DrfezKYUhH" target="_blank"><img src={Discord} class="h-8 w-8 cursor-pointer" alt="discord" /></a>
+			<p>{Math.round($discordCount)} membres</p>
 		</div>
 	</div>
 {/if}
