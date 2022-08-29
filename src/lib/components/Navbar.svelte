@@ -9,7 +9,7 @@
 	<div class="flex-none">
 		<a
 			class="link link-hover"
-			href="https://github.com/QuentinAM/rules-featuring/tree/main"
+			href="https://github.com/QuentinAM/rules-stats/tree/main"
 			target="_blank">Github <i class="fa-brands fa-github" /></a
 		>
 		<div class="divider divider-horizontal" />

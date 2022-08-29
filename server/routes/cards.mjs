@@ -29,7 +29,13 @@ export default function GetAllCardModels() {
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				resolve(res.data.allCardModels);
+				const r = res.data.allCardModels.map((card) => {
+					return {
+						...card,
+						isCommon: card.slug.includes('common')
+					}
+				})
+				resolve(r);
 			});
 	});
 }

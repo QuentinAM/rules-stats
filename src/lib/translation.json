@@ -27,7 +27,17 @@
 		"duration": "Durée",
 		"unavailable": "Non disponible",
 		"on": "sur",
-		"by": "par"
+		"by": "par",
+		"cards": "cartes",
+		"Cards": "Cartes",
+		"ex_sold": "Exemplaires vendus !",
+		"Donated_to": "Reversés à",
+		"indie_artists": "artistes indés !",
+		"Cards_owned": "Cartes possédées !",
+		"obtained": "obtenues",
+		"sales": "ventes",
+		"rarest": "Cartes les plus rares",
+		"commons": "Cartes les plus communes"
 	},
 	"EN": {
 		"home": "Home",
@@ -57,6 +67,16 @@
 		"duration": "Duration",
 		"unavailable": "Unavailable",
 		"on": "on",
-		"by": "by"
+		"by": "by",
+		"cards": "cards",
+		"Cards": "Cards",
+		"ex_sold": "Copies sold !",
+		"Donated_to": "Donated to",
+		"indie_artists": "indie artists !",
+		"Cards_owned": "Cards owned !",
+		"obtained": "obtained",
+		"sales": "sales",
+		"rarest": "Rarest cards",
+		"commons": "Most Common cards"
 	}
 }
