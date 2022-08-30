@@ -8,6 +8,7 @@
 	import Spinner from '$lib/assets/spinner.png';
 	import Discord from '$lib/assets/discord.svg';
 	import Pack from '$lib/components/Pack.svelte';
+	import Favicon from '$lib/assets/favicon.png';
 	import Card from '$lib/components/Card.svelte';
 
 	let loading: boolean = true;
@@ -20,6 +21,10 @@
 	let totalPacks: number = 0;
 	let totalCards: number = 0;
 	let totalMoney: number = 0;
+
+	// Packs
+	let launchPackLeft: number = 0;
+	let starterPackLeft: number = 0;
 
 	// Cards
 	let rarestCommon: any;
@@ -44,6 +49,10 @@
 		easing: quadOut
 	});
 	const discordCount = tweened(0, {
+		duration: 3000,
+		easing: quadOut
+	}); 
+	const usersCount = tweened(0, {
 		duration: 3000,
 		easing: quadOut
 	}); 
@@ -78,19 +87,27 @@
 			loadingCards = false;
 		});
 
+		// Packs infos and users
+		res = await  fetch(`${dev ? 'http://localhost:3000' : ''}/api/infos`);
+		res = await res.json();
+		usersCount.set(res.userCount);
+		launchPackLeft = res.launchPackCount;
+		starterPackLeft = res.starterPackCount;
+
 		// Packs
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/launch-pack-s1`)
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3MvbGF1bmNoLXBhY2stczEucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMjAsImZpdCI6ImNvbnRhaW4ifX19';
 		res.link = 'https://rules.art/pack/launch-pack-s1';
+		res.left = launchPackLeft;
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/starter-pack-s1`)
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3Mvc3RhcnRlci1wYWNrLXMxLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NTEyLCJmaXQiOiJjb250YWluIn19fQ==';
 		res.link = 'https://rules.art/pack/starter-pack-s1';
+		res.left = starterPackLeft;
 		packs = [...packs, res];
-		console.log(packs);
 
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;
@@ -98,10 +115,6 @@
 			{
 				totalCards = totalPacks * 3;
 				totalMoney = totalPacks * 3.6;
-				console.log(`Total packs: ${totalPacks}`);
-				console.log(`Total cards: ${totalCards}`);
-				console.log(`Total money: ${totalMoney}`);
-
 				totalPacksProgress.set(totalPacks);
 				totalCardsProgress.set(totalCards);
 				totalMoneyProgress.set(totalMoney);
@@ -211,9 +224,17 @@
 		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3">
 			<div class="flex flex-col items-center space-y-2 glass rounded p-3 lg:w-1/5 w-full h-full">
 				<h1 class="font-semibold text-xl text-white">Socials</h1>
+				{#if $usersCount > 0}
+					<div class=" tooltip tooltip-bottom" data-tip="Value updated every 24h">
+						<div class="flex flex-row items-center space-x-2">
+							<a href="https://rules.art/" target="_blank"><img src={Favicon} class="h-8 w-8 cursor-pointer" alt="discord" /></a>
+							<p>{Math.round($usersCount)} <Translation id="members"/></p>
+						</div>
+					</div>
+				{/if}
 				<div class="flex flex-row items-center space-x-2">
 					<a href="https://discord.com/invite/DrfezKYUhH" target="_blank"><img src={Discord} class="h-8 w-8 cursor-pointer" alt="discord" /></a>
-					<p>{Math.round($discordCount)} membres</p>
+					<p>{Math.round($discordCount)} <Translation id="members"/></p>
 				</div>
 			</div>
 			<div class="flex lg:flex-row flex-col bg-base-100 items-center justify-center rounded p-3 lg:w-4/5 w-full">

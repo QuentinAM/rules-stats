@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export default function GetAllCardModels() {
+export default function GetUsers() {
 	return new Promise((resolve, reject) => {
 		fetch('https://api.rules.art/graphql', {
 			method: 'POST',
@@ -14,33 +14,17 @@ export default function GetAllCardModels() {
 			},
 			body: JSON.stringify({
 				query: `
-					query{
-						allCardModels{
-							slug,
-							pictureUrl,
-							artist{
-							displayName
-							},
-							season,
-							cardsMintedCount,
-						}
-					}
-				`
-			})
+                    query{
+                        users(slugs: [""]){
+							id
+                        }
+                    }
+                `
+            })
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				const r = res.data.allCardModels.map((card) => {
-					return {
-						...card,
-						isCommon: card.slug.includes('common')
-					}
-				})
-				resolve(r);
-			})
-			.catch((err) => {
-				console.log(err);
-				reject(err);
+				resolve(res.data.users);
 			});
 	});
 }

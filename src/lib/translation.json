@@ -37,7 +37,9 @@
 		"obtained": "obtenues",
 		"sales": "ventes",
 		"rarest": "Cartes les plus rares",
-		"commons": "Cartes les plus communes"
+		"commons": "Cartes les plus communes",
+		"not_opened": "non ouverts",
+		"members": "membres"
 	},
 	"EN": {
 		"home": "Home",
@@ -77,6 +79,8 @@
 		"obtained": "obtained",
 		"sales": "sales",
 		"rarest": "Rarest cards",
-		"commons": "Most Common cards"
+		"commons": "Most Common cards",
+		"not_opened": "not opened",
+		"members": "members"
 	}
 }
