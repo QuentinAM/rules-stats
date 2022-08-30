@@ -1,0 +1,103 @@
+{
+  "src/lib/assets/pack-bg.svg": {
+    "file": "_app/immutable/assets/pack-bg-beb4ef78.svg",
+    "src": "src/lib/assets/pack-bg.svg"
+  },
+  "src/lib/assets/spinner.png": {
+    "file": "_app/immutable/assets/spinner-15dea833.png",
+    "src": "src/lib/assets/spinner.png"
+  },
+  "src/lib/assets/discord.svg": {
+    "file": "_app/immutable/assets/discord-08abc1f5.svg",
+    "src": "src/lib/assets/discord.svg"
+  },
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "_app/immutable/start-53e188b8.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-bed743de.js",
+      "_singletons-eca981c1.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      "src/routes/__error.svelte",
+      "src/routes/index.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "_app/immutable/pages/__layout.svelte-bf3b2759.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bed743de.js",
+      "_utils-a18431ba.js"
+    ],
+    "css": [
+      "_app/immutable/assets/__layout-1709a14e.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/pack-bg-beb4ef78.svg"
+    ]
+  },
+  "src/routes/__error.svelte": {
+    "file": "_app/immutable/pages/__error.svelte-18ccfdaf.js",
+    "src": "src/routes/__error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bed743de.js",
+      "_Translation-d0029955.js",
+      "_singletons-eca981c1.js",
+      "_utils-a18431ba.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "_app/immutable/pages/index.svelte-967bc679.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bed743de.js",
+      "_Translation-d0029955.js",
+      "_singletons-eca981c1.js",
+      "_utils-a18431ba.js"
+    ],
+    "css": [
+      "_app/immutable/assets/index-6a9f535a.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/spinner-15dea833.png",
+      "_app/immutable/assets/discord-08abc1f5.svg"
+    ]
+  },
+  "_index-bed743de.js": {
+    "file": "_app/immutable/chunks/index-bed743de.js"
+  },
+  "_singletons-eca981c1.js": {
+    "file": "_app/immutable/chunks/singletons-eca981c1.js"
+  },
+  "_utils-a18431ba.js": {
+    "file": "_app/immutable/chunks/utils-a18431ba.js",
+    "imports": [
+      "_index-bed743de.js"
+    ]
+  },
+  "_Translation-d0029955.js": {
+    "file": "_app/immutable/chunks/Translation-d0029955.js",
+    "imports": [
+      "_singletons-eca981c1.js",
+      "_index-bed743de.js",
+      "_utils-a18431ba.js"
+    ]
+  },
+  "src/routes/index.css": {
+    "file": "_app/immutable/assets/index-6a9f535a.css",
+    "src": "src/routes/index.css"
+  },
+  "src/routes/__layout.css": {
+    "file": "_app/immutable/assets/__layout-1709a14e.css",
+    "src": "src/routes/__layout.css"
+  }
+}
