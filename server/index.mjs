@@ -9,6 +9,7 @@ const app = express();
 
 let launchPackCount = 0;
 let starterPackCount = 0;
+let atLeastOnePack = 0;
 let userCount = 0;
 
 async function UpdateCounts() {
@@ -16,7 +17,8 @@ async function UpdateCounts() {
 	const newRes = await Update();
 	launchPackCount = newRes[0];
 	starterPackCount = newRes[1];
-	userCount = newRes[2];
+	atLeastOnePack = newRes[2];
+	userCount = newRes[3];
 
 	if (DEBUG){
 		console.log('Launch Pack Count: ', launchPackCount);
@@ -53,7 +55,8 @@ app.get('/api/infos', (req, res) =>{
 	res.send({
 		launchPackCount: launchPackCount,
 		starterPackCount: starterPackCount,
-		userCount: userCount
+		userCount: userCount,
+		atLeastOnePack: atLeastOnePack
 	});
 })
 app.use(handler);

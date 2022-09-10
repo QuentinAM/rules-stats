@@ -25,6 +25,7 @@
 	// Packs
 	let launchPackLeft: number = 0;
 	let starterPackLeft: number = 0;
+	let atLeastOnePack: number = 0;
 
 	// Cards
 	let rarestCommon: any;
@@ -93,6 +94,7 @@
 		usersCount.set(res.userCount);
 		launchPackLeft = res.launchPackCount;
 		starterPackLeft = res.starterPackCount;
+		atLeastOnePack = res.atLeastOnePack;
 
 		// Packs
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/launch-pack-s1`)
@@ -219,13 +221,16 @@
 						<Pack {pack}/>
 					{/each}
 				</div>
+				{#if atLeastOnePack}
+					<p class="italic">{atLeastOnePack} <Translation id="least_one"/></p>
+				{/if}
 			</div>
 		</div>
 		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3">
 			<div class="flex flex-col items-center space-y-2 glass rounded p-3 lg:w-1/5 w-full h-full">
 				<h1 class="font-semibold text-xl text-white">Socials</h1>
 				{#if $usersCount > 0}
-					<div class=" tooltip tooltip-bottom" data-tip="Value updated every 24h">
+					<div class=" tooltip tooltip-bottom" data-tip={`Value updated every 24h`}>
 						<div class="flex flex-row items-center space-x-2">
 							<a href="https://rules.art/" target="_blank"><img src={Favicon} class="h-8 w-8 cursor-pointer" alt="discord" /></a>
 							<p>{Math.round($usersCount)} <Translation id="members"/></p>

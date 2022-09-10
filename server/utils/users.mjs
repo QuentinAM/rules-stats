@@ -24,6 +24,10 @@ export default function GetUsers() {
 		})
 			.then((res) => res.json())
 			.then((res) => {
+				if (!res.data) {
+					resolve([]);
+					return;
+				}
 				resolve(res.data.users);
 			});
 	});

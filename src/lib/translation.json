@@ -39,7 +39,8 @@
 		"rarest": "Cartes les plus rares",
 		"commons": "Cartes les plus communes",
 		"not_opened": "non ouverts",
-		"members": "membres"
+		"members": "membres",
+		"least_one": "membres ont au moins un pack !"
 	},
 	"EN": {
 		"home": "Home",
@@ -81,6 +82,7 @@
 		"rarest": "Rarest cards",
 		"commons": "Most Common cards",
 		"not_opened": "not opened",
-		"members": "members"
+		"members": "members",
+		"least_one": "members have at least one pack !"
 	}
 }
