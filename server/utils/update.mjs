@@ -38,7 +38,7 @@ export function Update(){
                 const starterPack = packBalance.find(pack => pack.pack.slug === 'starter-pack-s1');
                 launchPackCount += launchPack ? launchPack.balance : 0;
                 starterPackCount += starterPack ? starterPack.balance : 0;
-                atLeastOnePack += launchPack || starterPack ? 1 : 0;
+                atLeastOnePack += launchPack && starterPack && (launchPack.balance > 0 || starterPack.balance > 0)  ? 1 : 0;
             
                 if (j === packBalanceArray.length - 1) {
                     if (i + p >= length) {
