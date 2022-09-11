@@ -1,7 +1,7 @@
 import GetUsers from "./users.mjs";
 import GetPackBalance from "./packBalance.mjs";
 
-export const DEBUG = true;
+export const DEBUG = false;
 
 export function Update(){
     return new Promise(async (resolve, reject) => {
@@ -15,8 +15,7 @@ export function Update(){
         const length = users.length;
         const p = 500;
 
-        if (DEBUG)
-            console.log('Got users', length);
+        console.log('Got users', length);
 
         let launchPackCount = 0;
         let starterPackCount = 0;
@@ -38,7 +37,7 @@ export function Update(){
                 const starterPack = packBalance.find(pack => pack.pack.slug === 'starter-pack-s1');
                 launchPackCount += launchPack ? launchPack.balance : 0;
                 starterPackCount += starterPack ? starterPack.balance : 0;
-                atLeastOnePack += launchPack && starterPack && (launchPack.balance > 0 || starterPack.balance > 0)  ? 1 : 0;
+                atLeastOnePack += (launchPack && launchPack.balance > 0) || (starterPack && starterPack.balance > 0) ? 1 : 0;
             
                 if (j === packBalanceArray.length - 1) {
                     if (i + p >= length) {

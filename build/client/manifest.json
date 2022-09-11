@@ -12,7 +12,7 @@
     "src": "src/lib/assets/discord.svg"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "_app/immutable/start-7a3532ab.js",
+    "file": "_app/immutable/start-81c2112a.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
