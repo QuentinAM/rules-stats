@@ -73,13 +73,13 @@
 			numberOfCards = data.length / 2;
 
 			// Get common card with the lowest cardMintedCount
-			rarestCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
+			rarestCommon = data.filter((card: any) => card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
 
 			// Get platinum card with the lowest cardMintedCount
-			rarestPlatinum = data.filter((card: any) => !card.isCommon).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
+			rarestPlatinum = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
 			
 			// Check if there is another card with the same cardMintedCount as the platinum card
-			rarestPlatinumSecond = data.filter((card: any) => !card.isCommon && card.slug !== rarestPlatinum.slug && card.cardsMintedCount === rarestPlatinum.cardsMintedCount)[0];
+			rarestPlatinumSecond = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0 && card.slug !== rarestPlatinum.slug && card.cardsMintedCount === rarestPlatinum.cardsMintedCount)[0];
 
 			// Get common card with the highest cardMintedCount and cardMintedCount > 0
 			mostCommon = data.filter((card: any) => card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
