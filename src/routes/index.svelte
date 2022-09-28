@@ -31,6 +31,10 @@
 	let rarestCommon: any;
 	let rarestPlatinum: any;
 	let rarestPlatinumSecond: any;
+	let wantedCommon: any;
+	let wantedPlatinum: any;
+	let leastCommon: any;
+	let leastPlatinum: any;
 
 	let mostCommon: any;
 	let mostPlatinum: any;
@@ -86,6 +90,18 @@
 			// Check if there is another card with the same cardMintedCount as the platinum card
 			mostPlatinumSecond = data.filter((card: any) => !card.isCommon && card.slug !== mostPlatinum.slug && card.cardsMintedCount === mostPlatinum.cardsMintedCount)[0];
 			loadingCards = false;
+
+			// Get common with the most averageSale
+			wantedCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
+
+			// Get platinum with the most averageSale
+			wantedPlatinum = data.filter((card: any) => !card.isCommon).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
+		
+			// Get coomon with the lowest lowestAsk
+			leastCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
+
+			// Get platinum with the lowest lowestAsk and lowestAsk !== null
+			leastPlatinum = data.filter((card: any) => !card.isCommon && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 		});
 
 		// Packs infos and users
@@ -111,6 +127,13 @@
 		res.left = starterPackLeft;
 		packs = [...packs, res];
 
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/kush-base-pack`)
+		res = await res.json();
+		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3Mva3VzaC1iYXNlLXBhY2sucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo1MTIsImZpdCI6ImNvbnRhaW4ifX19';
+		res.link = 'https://rules.art/pack/kush-base-pack';
+		res.left = starterPackLeft;
+		packs = [...packs, res];
+		
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;
 			if (index === array.length - 1)
@@ -209,7 +232,7 @@
 					<h1 class="font-semibold">{allCards.length} <Translation id="cards"/> !</h1>
 					<div transition:slide class="grid lg:grid-cols-4 overflow-x-hidden md:grid-cols-3 grid-cols-2 space-x-3 space-y-5 h-[30rem] rounded overflow-y-auto">
 						{#each allCards as card}
-							<Card {card}/>
+							<Card {card} market={false}/>
 						{/each}
 					</div>
 				{/if}
@@ -226,8 +249,8 @@
 				{/if}
 			</div>
 		</div>
-		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3">
-			<div class="flex flex-col items-center space-y-2 glass rounded p-3 lg:w-1/5 w-full h-full">
+		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3 h-[20rem]">
+			<div class="flex flex-col items-center justify-center space-y-2 glass rounded p-3 lg:w-1/5 w-full h-full">
 				<h1 class="font-semibold text-xl text-white">Socials</h1>
 				{#if $usersCount > 0}
 					<div class=" tooltip tooltip-bottom" data-tip={`Value updated every 24h`}>
@@ -249,14 +272,14 @@
 					<div transition:slide class="flex flex-col space-y-2 w-full">
 						<p class="font-semibold text-white"><Translation id="rarest"/></p>
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
-							<Card card={rarestCommon} />
+							<Card card={rarestCommon} market={false}/>
 							{#if rarestPlatinumSecond}
 								<div class="flex flex-row">
-									<Card card={rarestPlatinum} />
-									<Card card={rarestPlatinumSecond} />
+									<Card card={rarestPlatinum} market={false} />
+									<Card card={rarestPlatinumSecond} market={false} />
 								</div>
 							{:else}
-								<Card card={rarestPlatinum} />
+								<Card card={rarestPlatinum} market={false}  />
 							{/if}
 						</div>
 					</div>
@@ -264,15 +287,38 @@
 					<div transition:slide class="flex flex-col space-y-2 w-full">
 						<p class="font-semibold text-white"><Translation id="commons"/></p>
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
-							<Card card={mostCommon} />
+							<Card card={mostCommon} market={false}  />
 							{#if mostPlatinumSecond}
 								<div class="flex flex-row">
-									<Card card={mostPlatinum} />
-									<Card card={mostPlatinumSecond} />
+									<Card card={mostPlatinum} market={false}  />
+									<Card card={mostPlatinumSecond} market={false}  />
 								</div>
 							{:else}
-								<Card card={mostPlatinum} />
+								<Card card={mostPlatinum} market={false}  />
 							{/if}
+						</div>
+					</div>
+				{/if}
+			</div>
+		</div>
+		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3">
+			<div class="flex lg:flex-row flex-col bg-base-100 items-center justify-center rounded p-3 w-full">
+				{#if loadingCards}
+					<img src={Spinner} class="animate-spin h-10 w-10" alt="spinner" />
+				{:else}
+					<div transition:slide class="flex flex-col space-y-2 w-full">
+						<p class="font-semibold text-white"><Translation id="most_looked"/></p>
+						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
+							<Card card={wantedCommon} market={true} averageSale />
+							<Card card={wantedPlatinum}  market={true} averageSale/>
+						</div>
+					</div>
+					<div class="divider lg:divider-horizontal divider-vertical"></div>
+					<div transition:slide class="flex flex-col space-y-2 w-full">
+						<p class="font-semibold text-white"><Translation id="least_expensive"/></p>
+						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
+							<Card card={leastCommon} market={true} />
+							<Card card={leastPlatinum}  market={true} />
 						</div>
 					</div>
 				{/if}

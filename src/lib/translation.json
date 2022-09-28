@@ -40,7 +40,11 @@
 		"commons": "Cartes les plus communes",
 		"not_opened": "non ouverts",
 		"members": "membres",
-		"least_one": "membres ont au moins un pack !"
+		"least_one": "membres ont au moins un pack !",
+		"most_looked": "Cartes les plus recherchées",
+		"average_sale": "Vente moyenne",
+		"least_expensive": "Cartes les moins chères",
+		"lowest_ask": "Demande la plus basse"
 	},
 	"EN": {
 		"home": "Home",
@@ -83,6 +87,10 @@
 		"commons": "Most Common cards",
 		"not_opened": "not opened",
 		"members": "members",
-		"least_one": "members have at least one pack !"
+		"least_one": "members have at least one pack !",
+		"most_looked": "Most wanted cards",
+		"average_sale": "Average sale",
+		"least_expensive": "Least expensive card",
+		"lowest_ask": "Lowest ask"
 	}
 }
