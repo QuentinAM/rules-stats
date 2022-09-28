@@ -81,11 +81,11 @@
 			// Check if there is another card with the same cardMintedCount as the platinum card
 			rarestPlatinumSecond = data.filter((card: any) => !card.isCommon && card.slug !== rarestPlatinum.slug && card.cardsMintedCount === rarestPlatinum.cardsMintedCount)[0];
 
-			// Get common card with the highest cardMintedCount
-			mostCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
+			// Get common card with the highest cardMintedCount and cardMintedCount > 0
+			mostCommon = data.filter((card: any) => card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
 
-			// Get platinum card with the highest cardMintedCount
-			mostPlatinum = data.filter((card: any) => !card.isCommon).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
+			// Get platinum card with the highest cardMintedCount and cardMintedCount > 0
+			mostPlatinum = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
 
 			// Check if there is another card with the same cardMintedCount as the platinum card
 			mostPlatinumSecond = data.filter((card: any) => !card.isCommon && card.slug !== mostPlatinum.slug && card.cardsMintedCount === mostPlatinum.cardsMintedCount)[0];
@@ -97,9 +97,9 @@
 			// Get platinum with the most averageSale
 			wantedPlatinum = data.filter((card: any) => !card.isCommon).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
 		
-			// Get coomon with the lowest lowestAsk
-			leastCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
-
+			// Get coomon with the lowest lowestAsk and lowestAsk > 0
+			leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
+			
 			// Get platinum with the lowest lowestAsk and lowestAsk !== null
 			leastPlatinum = data.filter((card: any) => !card.isCommon && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 		});
