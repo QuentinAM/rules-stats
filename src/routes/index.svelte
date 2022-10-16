@@ -25,6 +25,8 @@
 	// Packs
 	let launchPackLeft: number = 0;
 	let starterPackLeft: number = 0;
+	let kushPackLeft: number = 0;
+	let honeyPackLeft: number = 0;
 	let atLeastOnePack: number = 0;
 
 	// Cards
@@ -110,6 +112,8 @@
 		usersCount.set(res.userCount);
 		launchPackLeft = res.launchPackCount;
 		starterPackLeft = res.starterPackCount;
+		kushPackLeft = res.kushPackCount;
+		honeyPackLeft = res.honeyPackCount;
 		atLeastOnePack = res.atLeastOnePack;
 
 		// Packs
@@ -131,14 +135,14 @@
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3Mva3VzaC1iYXNlLXBhY2sucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo1MTIsImZpdCI6ImNvbnRhaW4ifX19';
 		res.link = 'https://rules.art/pack/kush-base-pack';
-		res.left = starterPackLeft;
+		res.left = kushPackLeft;
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/honey-base-pack`)
 		res = await res.json();
 		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3MvaG9uZXktYmFzZS1wYWNrLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NTEyLCJmaXQiOiJjb250YWluIn19fQ==';
 		res.link = 'https://rules.art/pack/honey-base-pack';
-		res.left = starterPackLeft;
+		res.left = honeyPackLeft;
 		packs = [...packs, res];
 		
 		packs.forEach((pack, index, array) => {

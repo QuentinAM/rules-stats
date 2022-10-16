@@ -15,7 +15,7 @@ export default function GetUsers() {
 			body: JSON.stringify({
 				query: `
                     query{
-                        users(slugs: [""]){
+                        users(slugs: ["foxt3c"]){
 							id
                         }
                     }

@@ -13,12 +13,14 @@ export function Update(){
         }
 
         const length = users.length;
-        const p = 500;
+        const p = 400   ;
 
         console.log('Got users', length);
 
         let launchPackCount = 0;
         let starterPackCount = 0;
+        let kushPackCount = 0;
+        let honeyPackCount = 0;
         let atLeastOnePack = 0;
         let requestCount = 1;
 
@@ -35,15 +37,19 @@ export function Update(){
                 const packBalance = packBalanceArray[j].packsBalances;
                 const launchPack = packBalance.find(pack => pack.pack.slug === 'launch-pack-s1');
                 const starterPack = packBalance.find(pack => pack.pack.slug === 'starter-pack-s1');
+                const kushPack = packBalance.find(pack => pack.pack.slug === 'kush-base-pack');
+                const honeyPack = packBalance.find(pack => pack.pack.slug === 'honey-base-pack');
                 launchPackCount += launchPack ? launchPack.balance : 0;
                 starterPackCount += starterPack ? starterPack.balance : 0;
+                kushPackCount += kushPack ? kushPack.balance : 0;
+                honeyPackCount += honeyPack ? honeyPack.balance : 0;
                 atLeastOnePack += (launchPack && launchPack.balance > 0) || (starterPack && starterPack.balance > 0) ? 1 : 0;
             
                 if (j === packBalanceArray.length - 1) {
                     if (i + p >= length) {
                         if (DEBUG)
                             console.log('Request count: ', requestCount);
-                        resolve([launchPackCount, starterPackCount, atLeastOnePack, length]);
+                        resolve([launchPackCount, starterPackCount, atLeastOnePack, length, kushPackCount, honeyPackCount]);
                     }
                 }
             }
