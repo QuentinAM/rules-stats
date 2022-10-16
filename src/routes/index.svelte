@@ -133,6 +133,13 @@
 		res.link = 'https://rules.art/pack/kush-base-pack';
 		res.left = starterPackLeft;
 		packs = [...packs, res];
+
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/honey-base-pack`)
+		res = await res.json();
+		res.pictureUrl = 'https://assets.rules.art/eyJidWNrZXQiOiJydWxlc2xhYnMtaW1hZ2VzIiwia2V5IjoicGFja3MvaG9uZXktYmFzZS1wYWNrLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NTEyLCJmaXQiOiJjb250YWluIn19fQ==';
+		res.link = 'https://rules.art/pack/honey-base-pack';
+		res.left = starterPackLeft;
+		packs = [...packs, res];
 		
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;
