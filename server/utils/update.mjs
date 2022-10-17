@@ -9,7 +9,7 @@ export function Update(){
     return new Promise(async (resolve, reject) => {
         let users = await GetUsers();
 
-        const length = users.length;
+        let length = users.length;
         const p = 400   ;
 
         console.log('Got users', length);
@@ -19,6 +19,7 @@ export function Update(){
             // Get data from file
             // Load ../data.json
             users = require('../data.json');
+            length = users.length; 
         }
 
         let launchPackCount = 0;
