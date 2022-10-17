@@ -18,7 +18,8 @@ export function Update(){
         {
             // Get data from file
             // Load ../data.json
-            users = require('../data.json');
+            let res = require('../data.json');
+            users = res.data.users;
             length = users.length; 
         }
 
