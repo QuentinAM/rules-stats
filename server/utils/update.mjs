@@ -1,21 +1,23 @@
 import GetUsers from "./users.mjs";
 import GetPackBalance from "./packBalance.mjs";
 
-export const DEBUG = false;
+export const DEBUG = true;
 
 export function Update(){
     return new Promise(async (resolve, reject) => {
-        const users = await GetUsers();
-        if (users === []) {
-            console.log('No users found');
-            resolve([0, 0, 0, 0]);
-            return;
-        }
+        let users = await GetUsers();
 
         const length = users.length;
         const p = 400   ;
 
         console.log('Got users', length);
+
+        if (length == 0)
+        {
+            // Get data from file
+            // Load ../data.json
+            users = require('../data.json');
+        }
 
         let launchPackCount = 0;
         let starterPackCount = 0;
