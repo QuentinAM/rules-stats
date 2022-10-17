@@ -1,5 +1,7 @@
 import GetUsers from "./users.mjs";
 import GetPackBalance from "./packBalance.mjs";
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 export const DEBUG = true;
 
