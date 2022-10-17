@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import GetAllCardModels from './routes/cards.mjs';
 import GetPack from './routes/pack.mjs';
 import { Update, DEBUG } from './utils/update.mjs';
