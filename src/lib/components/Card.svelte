@@ -29,7 +29,9 @@
 	<div class="flex flex-col justify-center items-center lg:text-sm text-xs">
 		<div class="flex flex-row items-center space-x-2">
 			<h2 class="font-semibold text-slate-200">{card.artist.displayName}</h2>
-			{#if card.isCommon}
+			{#if card.slug.includes('halloween')}
+				<div class="badge bg-orange-400 text-black">Halloween</div>
+			{:else if card.isCommon}
 				<div class="badge badge-primary"><Translation id="common"/></div>
 			{:else}
 				<div class="badge bg-slate-400 text-black"><Translation id="platinum"/></div>

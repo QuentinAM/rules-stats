@@ -29,7 +29,12 @@ export default function GetPackBalance(ids) {
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				resolve(res.data.usersByIds);
+				if (res.data.usersByIds === undefined){
+					resolve([]);
+				}
+				else{
+					resolve(res.data.usersByIds);
+				}
 			});
 	});
 }

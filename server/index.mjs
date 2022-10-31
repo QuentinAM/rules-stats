@@ -11,6 +11,10 @@ let launchPackCount = 0;
 let starterPackCount = 0;
 let kushPackCount = 0;
 let honeyPackCount = 0;
+let halloweenPackCount = 0;
+let threeHPacks = 0;
+let twoHPacks = 0;
+let oneHPacks = 0;
 let atLeastOnePack = 0;
 let userCount = 0;
 
@@ -23,12 +27,17 @@ async function UpdateCounts() {
 	userCount = newRes[3];
 	kushPackCount = newRes[4];
 	honeyPackCount = newRes[5];
+	halloweenPackCount= newRes[6];
+	threeHPacks = newRes[7];
+	twoHPacks = newRes[8];
+	oneHPacks = newRes[9];
 
 	if (DEBUG){
 		console.log('Launch Pack Count: ', launchPackCount);
 		console.log('Starter Pack Count: ', starterPackCount);
 		console.log('Kush Pack Count: ', kushPackCount);
 		console.log('Honey Pack Count: ', honeyPackCount);
+		console.log('Halloween Pack Count: ', halloweenPackCount);
 		console.log('User Count: ', userCount);
 	}
 	console.log('Updated counts, next update in 24h');
@@ -62,7 +71,11 @@ app.get('/api/infos', (req, res) =>{
 		launchPackCount: launchPackCount,
 		starterPackCount: starterPackCount,
 		kushPackCount: kushPackCount,
-		honeyPackCount: honeyPackCount,
+		honeyPackCount: honeyPackCount,	
+		halloweenPackCount: halloweenPackCount,
+		threeHPacks: threeHPacks,
+		twoHPacks: twoHPacks,
+		oneHPacks: oneHPacks,
 		userCount: userCount,
 		atLeastOnePack: atLeastOnePack
 	});

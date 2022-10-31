@@ -24,7 +24,7 @@ export default function GetPack(slug) {
                             availableQuantity,
                             description,
                             displayName,
-							pictureUrl
+							pictureUrl(derivative: "width=512")
                         }
                     }
                 `

@@ -12,7 +12,7 @@
     "src": "src/lib/assets/discord.svg"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "_app/immutable/start-361fd962.js",
+    "file": "_app/immutable/start-f9b73f42.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -35,32 +35,32 @@
       "_utils-a18431ba.js"
     ],
     "css": [
-      "_app/immutable/assets/__layout-08671a9b.css"
+      "_app/immutable/assets/__layout-6f612686.css"
     ],
     "assets": [
       "_app/immutable/assets/pack-bg-beb4ef78.svg"
     ]
   },
   "src/routes/__error.svelte": {
-    "file": "_app/immutable/pages/__error.svelte-547aa70b.js",
+    "file": "_app/immutable/pages/__error.svelte-4ff32af5.js",
     "src": "src/routes/__error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-bed743de.js",
-      "_Translation-ee06acc8.js",
+      "_Translation-0f26202d.js",
       "_singletons-eca981c1.js",
       "_utils-a18431ba.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "_app/immutable/pages/index.svelte-cd03fdf2.js",
+    "file": "_app/immutable/pages/index.svelte-7df0975a.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-bed743de.js",
-      "_Translation-ee06acc8.js",
+      "_Translation-0f26202d.js",
       "_singletons-eca981c1.js",
       "_utils-a18431ba.js"
     ],
@@ -84,8 +84,8 @@
       "_index-bed743de.js"
     ]
   },
-  "_Translation-ee06acc8.js": {
-    "file": "_app/immutable/chunks/Translation-ee06acc8.js",
+  "_Translation-0f26202d.js": {
+    "file": "_app/immutable/chunks/Translation-0f26202d.js",
     "imports": [
       "_singletons-eca981c1.js",
       "_index-bed743de.js",
@@ -97,7 +97,7 @@
     "src": "src/routes/index.css"
   },
   "src/routes/__layout.css": {
-    "file": "_app/immutable/assets/__layout-08671a9b.css",
+    "file": "_app/immutable/assets/__layout-6f612686.css",
     "src": "src/routes/__layout.css"
   }
 }
