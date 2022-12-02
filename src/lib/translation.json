@@ -44,7 +44,8 @@
 		"most_looked": "Cartes les plus recherchées",
 		"average_sale": "Vente moyenne",
 		"least_expensive": "Cartes les moins chères",
-		"lowest_ask": "Demande la plus basse"
+		"lowest_ask": "Demande la plus basse", 
+		"marketplace_contribution": "Sans les ventes de la marketplace"
 	},
 	"EN": {
 		"home": "Home",
@@ -91,6 +92,7 @@
 		"most_looked": "Most wanted cards",
 		"average_sale": "Average sale",
 		"least_expensive": "Least expensive card",
-		"lowest_ask": "Lowest ask"
+		"lowest_ask": "Lowest ask",
+		"marketplace_contribution": "Without marketplace sales"
 	}
 }

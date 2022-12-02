@@ -44,7 +44,7 @@
 				<p><Translation id="lowest_ask"/>: {FormatPrice(card.lowestAsk)} ETH</p>
 			{/if}
 		{:else}
-			<p>{card.cardsMintedCount} <Translation id="obtained"/></p>
+			<p class="font-semibold"><span class=" text-white">{card.cardsMintedCount}</span> / {card.scarcity.maxSupply} <Translation id="obtained"/></p>
 		{/if}
 		<p class="italic"><Translation id="season"/> {card.season}</p>
 	</div>

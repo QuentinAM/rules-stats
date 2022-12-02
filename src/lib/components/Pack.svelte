@@ -23,11 +23,11 @@
     <a transition:scale={{ duration: 1000 }} href={pack.link} target="_blank"><img class="lg:w-40 lg:h-64 w-32 h-48 img" src={pack.pictureUrl} alt="pack"/></a>
     <h1 class="font-bold text-lg text-white">{pack.displayName}</h1>
     <p class="text-slate-300"><span class="font-semibold">{Math.round($progressSell)}</span> <Translation id="sales"/></p>
-    {#if pack.left !== 0}
+    <!-- {#if pack.left !== 0}
         <div class=" tooltip tooltip-bottom" data-tip="Value updated every 24h">
             <p class="text-slate-300"><span class="font-semibold">{pack.left}</span> <Translation id="not_opened"/> ({Math.round(pack.left / (pack.supply + pack.availableQuantity) * 10000) / 100}%)</p>
         </div>
-    {/if}
+    {/if} -->
     <p class="break-words">{pack.description}</p>
     <p class="italic"><Translation id="released_on"/> {new Date(pack.releaseDate).toLocaleDateString('FR')}</p>
 </div>

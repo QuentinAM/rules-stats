@@ -48,7 +48,7 @@ async function Setup(){
 		await UpdateCounts();
 	}, 1000 * 60 * 60 * 24);
 }
-Setup();
+//Setup();
 
 app.use(cors());
 app.get('/api/cards', async (req, res) => {

@@ -22,21 +22,9 @@
 	let totalCards: number = 0;
 	let totalMoney: number = 0;
 
-	// Packs
-	let launchPackLeft: number = 0;
-	let starterPackLeft: number = 0;
-	let kushPackLeft: number = 0;
-	let honeyPackLeft: number = 0;
-	let halloweenPackLeft: number = 0;
-	let threeHPacks: number = 0;
-	let twoHPacks: number = 0;
-	let oneHPacks: number = 0;
-	let atLeastOnePack: number = 0;
-
 	// Cards
 	let rarestCommon: any;
 	let rarestPlatinum: any;
-	let rarestPlatinumSecond: any;
 	let rarestHalloween: any;
 
 	let wantedCommon: any;
@@ -49,7 +37,6 @@
 
 	let mostCommon: any;
 	let mostPlatinum: any;
-	let mostPlatinumSecond: any;
 	let mostHalloween: any;
 
 	// Progress
@@ -87,11 +74,8 @@
 			rarestCommon = data.filter((card: any) => card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
 
 			// Get platinum card with the lowest cardMintedCount
-			rarestPlatinum = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
+			rarestPlatinum = data.filter((card: any) => card.slug.includes("platinium") && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
 			
-			// Check if there is another card with the same cardMintedCount as the platinum card
-			rarestPlatinumSecond = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0 && card.slug !== rarestPlatinum.slug && card.cardsMintedCount === rarestPlatinum.cardsMintedCount)[0];
-
 			// Get halloween card with the lowest cardMintedCount
 			rarestHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.cardsMintedCount > 0).sort((a: any, b: any) => a.cardsMintedCount - b.cardsMintedCount)[0];
 
@@ -99,11 +83,8 @@
 			mostCommon = data.filter((card: any) => card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
 
 			// Get platinum card with the highest cardMintedCount and cardMintedCount > 0
-			mostPlatinum = data.filter((card: any) => !card.isCommon && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
+			mostPlatinum = data.filter((card: any) => card.slug.includes("platinium") && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
 
-			// Check if there is another card with the same cardMintedCount as the platinum card
-			mostPlatinumSecond = data.filter((card: any) => !card.isCommon && card.slug !== mostPlatinum.slug && card.cardsMintedCount === mostPlatinum.cardsMintedCount)[0];
-			
 			// Get halloween card with the highest cardMintedCount and cardMintedCount > 0
 			mostHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.cardsMintedCount > 0).sort((a: any, b: any) => b.cardsMintedCount - a.cardsMintedCount)[0];
 
@@ -111,7 +92,7 @@
 			wantedCommon = data.filter((card: any) => card.isCommon).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
 
 			// Get platinum with the most averageSale
-			wantedPlatinum = data.filter((card: any) => !card.isCommon).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
+			wantedPlatinum = data.filter((card: any) => card.slug.includes("platinium")).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
 
 			// Get halloween with the most averageSale and averageSale !== null
 			wantedHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.averageSale !== null).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
@@ -120,7 +101,7 @@
 			leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 			
 			// Get platinum with the lowest lowestAsk and lowestAsk !== null
-			leastPlatinum = data.filter((card: any) => !card.isCommon && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
+			leastPlatinum = data.filter((card: any) => card.slug.includes("platinium") && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 		
 			// Get halloween with the lowest lowestAsk and lowestAsk !== null
 			leastHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
@@ -128,52 +109,39 @@
 			loadingCards = false;
 		});
 
-		// Packs infos and users
-		res = await  fetch(`${dev ? 'http://localhost:3000' : ''}/api/infos`);
-		res = await res.json();
-		usersCount.set(res.userCount);
-		launchPackLeft = res.launchPackCount;
-		starterPackLeft = res.starterPackCount;
-		kushPackLeft = res.kushPackCount;
-		honeyPackLeft = res.honeyPackCount;
-		halloweenPackLeft = res.halloweenPackCount;
-		threeHPacks = res.threeHPacks;
-		twoHPacks = res.twoHPacks;
-		oneHPacks = res.oneHPacks;
-		console.log(threeHPacks, twoHPacks, oneHPacks);
-		atLeastOnePack = res.atLeastOnePack;
-
 		// Packs
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/launch-pack-s1`)
 		res = await res.json();
 		res.link = 'https://rules.art/pack/launch-pack-s1';
-		res.left = launchPackLeft;
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/starter-pack-s1`)
 		res = await res.json();
 		res.link = 'https://rules.art/pack/starter-pack-s1';
-		res.left = starterPackLeft;
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/kush-base-pack`)
 		res = await res.json();
 		res.link = 'https://rules.art/pack/kush-base-pack';
-		res.left = kushPackLeft;
 		packs = [...packs, res];
 
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/honey-base-pack`)
 		res = await res.json();
 		res.link = 'https://rules.art/pack/honey-base-pack';
-		res.left = honeyPackLeft;
 		packs = [...packs, res];
 
 		// Add https://rules.art/pack/halloween-pack
 		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/halloween-pack`)
 		res = await res.json();
 		res.link = 'https://rules.art/pack/halloween-pack';
-		res.left = halloweenPackLeft;
 		packs = [...packs, res];
+		
+		// Add https://rules.art/pack/wave-base-pack
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/wave-base-pack`)
+		res = await res.json();
+		res.link = 'https://rules.art/pack/wave-base-pack';
+		packs = [...packs, res];
+
 		
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;
@@ -224,13 +192,18 @@
 				</div>
 				<div class="stat-desc text-slate-300">
 					<div class="flex flex-row">
-						<p><Translation id="Donated_to"/>&nbsp;</p> 
-						{#if loadingCards}
-							<img src={Spinner} class="animate-spin h-4 w-4" alt="spinner" />
-						{:else}
-							{CalculateNumberOfArtists(allCards)}
-						{/if}
-						<p>&nbsp;<Translation id="indie_artists"/></p>
+						<div class="flex flex-col">
+							<div class="flex flex-row">
+								<p><Translation id="Donated_to"/>&nbsp;</p> 
+								{#if loadingCards}
+									<img src={Spinner} class="animate-spin h-4 w-4" alt="spinner" />
+								{:else}
+									{CalculateNumberOfArtists(allCards)}
+								{/if}
+								<p>&nbsp;<Translation id="indie_artists"/></p>
+							</div>
+							<p><Translation id="marketplace_contribution"/></p>	
+						</div>
 						<div class="radial-progress h-8 w-8" style={`--value:${Math.abs((($totalMoneyProgress / totalMoney) - 0.3)) * 100}; --size:2rem; --thickness: 0.5rem;`}>
 						</div>
 					</div>
@@ -285,18 +258,10 @@
 						<Pack {pack}/>
 					{/each}
 				</div>
-				{#if atLeastOnePack}
-					<p class="italic">{atLeastOnePack} <Translation id="least_one"/></p>
-				{/if}
 			</div>
 		</div>
 		<div class="flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3 h-[20rem]">
 			<div class="flex flex-col items-center justify-center space-y-2 glass rounded p-3 lg:w-1/5 w-full h-full">
-				<h1 class="font-semibold text-xl text-white">Spooky news 🎃</h1>
-				<h1 class=""><span class="font-semibold">{threeHPacks}</span> users have 3 halloween pack</h1>
-				<h1 class=""><span class="font-semibold">{twoHPacks}</span> users have 2 halloween pack</h1>
-				<h1 class=""><span class="font-semibold">{oneHPacks}</span> users have 1 halloween pack</h1>
-				<div class="divider divider-vertical"></div>
 				<h1 class="font-semibold text-xl text-white">Socials</h1>
 				{#if $usersCount > 0}
 					<div class=" tooltip tooltip-bottom" data-tip={`Value updated every 24h`}>
@@ -319,17 +284,8 @@
 						<p class="font-semibold text-white"><Translation id="rarest"/></p>
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
 							<Card card={rarestCommon} market={false}/>
-							{#if rarestPlatinumSecond}
-								<div class="flex flex-row">
-									<Card card={rarestPlatinum} market={false} />
-									<Card card={rarestPlatinumSecond} market={false} />
-								</div>
-							{:else}
-								<Card card={rarestPlatinum} market={false}  />
-							{/if}
-							{#if rarestHalloween}
-								<Card card={rarestHalloween} market={false}/>
-							{/if}
+							<Card card={rarestPlatinum} market={false}  />
+							<Card card={rarestHalloween} market={false}/>
 						</div>
 					</div>
 					<div class="divider lg:divider-horizontal divider-vertical"></div>
@@ -337,17 +293,8 @@
 						<p class="font-semibold text-white"><Translation id="commons"/></p>
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
 							<Card card={mostCommon} market={false}  />
-							{#if mostPlatinumSecond}
-								<div class="flex flex-row">
-									<Card card={mostPlatinum} market={false}  />
-									<Card card={mostPlatinumSecond} market={false}  />
-								</div>
-							{:else}
-								<Card card={mostPlatinum} market={false}  />
-							{/if}
-							{#if mostHalloween}
-								<Card card={mostHalloween} market={false}  />
-							{/if}
+							<Card card={mostPlatinum} market={false}  />
+							<Card card={mostHalloween} market={false}  />
 						</div>
 					</div>
 				{/if}
@@ -363,9 +310,7 @@
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
 							<Card card={wantedCommon} market={true} averageSale />
 							<Card card={wantedPlatinum}  market={true} averageSale/>
-							{#if wantedHalloween}
-								<Card card={wantedHalloween} market={true} averageSale/>
-							{/if}
+							<Card card={wantedHalloween} market={true} averageSale/>
 						</div>
 					</div>
 					<div class="divider lg:divider-horizontal divider-vertical"></div>
@@ -374,9 +319,7 @@
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
 							<Card card={leastCommon} market={true} />
 							<Card card={leastPlatinum}  market={true} />
-							{#if leastHalloween}
-								<Card card={leastHalloween} market={true} />
-							{/if}
+							<Card card={leastHalloween} market={true} />
 						</div>
 					</div>
 				{/if}
