@@ -142,6 +142,11 @@
 		res.link = 'https://rules.art/pack/wave-base-pack';
 		packs = [...packs, res];
 
+		// Add https://rules.art/pack/dark-base-pack
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/dark-base-pack`)
+		res = await res.json();
+		res.link = 'https://rules.art/pack/dark-base-pack';
+		packs = [...packs, res];
 		
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;

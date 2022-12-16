@@ -12,7 +12,7 @@
     "src": "src/lib/assets/discord.svg"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "_app/immutable/start-82c2ba15.js",
+    "file": "_app/immutable/start-4abecd18.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -54,7 +54,7 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "_app/immutable/pages/index.svelte-4948b7c1.js",
+    "file": "_app/immutable/pages/index.svelte-d6ab8eb2.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
