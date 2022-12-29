@@ -110,11 +110,15 @@
 		});
 
 		// Packs
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/packs`)
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/packs`);
 		res = await res.json();
 		packs = res;
-		console.log(packs);
-		
+
+		// Add starter-pack-s1
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/starter-pack-s1`);
+		res = await res.json();
+		packs = [...packs, res];
+
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;
 			if (index === array.length - 1)
