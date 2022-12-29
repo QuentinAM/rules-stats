@@ -110,43 +110,10 @@
 		});
 
 		// Packs
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/launch-pack-s1`)
+		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/packs`)
 		res = await res.json();
-		res.link = 'https://rules.art/pack/launch-pack-s1';
-		packs = [...packs, res];
-
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/starter-pack-s1`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/starter-pack-s1';
-		packs = [...packs, res];
-
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/kush-base-pack`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/kush-base-pack';
-		packs = [...packs, res];
-
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/honey-base-pack`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/honey-base-pack';
-		packs = [...packs, res];
-
-		// Add https://rules.art/pack/halloween-pack
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/halloween-pack`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/halloween-pack';
-		packs = [...packs, res];
-		
-		// Add https://rules.art/pack/wave-base-pack
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/wave-base-pack`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/wave-base-pack';
-		packs = [...packs, res];
-
-		// Add https://rules.art/pack/dark-base-pack
-		res = await fetch(`${dev ? 'http://localhost:3000' : ''}/api/pack/dark-base-pack`)
-		res = await res.json();
-		res.link = 'https://rules.art/pack/dark-base-pack';
-		packs = [...packs, res];
+		packs = res;
+		console.log(packs);
 		
 		packs.forEach((pack, index, array) => {
 			totalPacks += pack.supply + pack.availableQuantity;

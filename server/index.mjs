@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import GetAllCardModels from './routes/cards.mjs';
+import GetPacks from './routes/packs.mjs';
 import GetPack from './routes/pack.mjs';
 import { Update, DEBUG } from './utils/update.mjs';
 import { handler } from '../build/handler.js';
@@ -80,5 +81,9 @@ app.get('/api/infos', (req, res) =>{
 		atLeastOnePack: atLeastOnePack
 	});
 })
+app.get('/api/packs', async (req, res) => {
+	const packs = await GetPacks();
+	res.send(packs);
+});
 app.use(handler);
 app.listen(3000, () => console.log('Listening on port 3000!'));
