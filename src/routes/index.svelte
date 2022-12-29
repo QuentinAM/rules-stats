@@ -130,7 +130,13 @@
 				totalMoneyProgress.set(totalMoney);
 			}
 		});
-		loading = false;
+
+		// Add .link to packs
+		packs.forEach((pack, index, array) => {
+			pack.link = `https://rules.art/pack/${pack.slug}`;
+			if (index === array.length - 1)
+				loading = false;
+		});
 
 		// Socials
 		fetch(`https://discord.com/api/v9/invites/DrfezKYUhH?with_counts=true&with_expiration=true`)
