@@ -24,7 +24,6 @@ export default function GetAllCardModels() {
 							season,
 							cardsMintedCount,
 							averageSale,
-							lowestAsk, 
 							scarcity{
 								maxSupply
 							}

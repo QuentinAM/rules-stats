@@ -40,7 +40,7 @@
 		{#if market}
 			{#if averageSale}
 				<p><Translation id="average_sale"/>: {FormatAverageSale(card.averageSale)} ETH</p>
-			{:else}
+			{:else if card.lowestAsk}
 				<p><Translation id="lowest_ask"/>: {FormatPrice(card.lowestAsk)} ETH</p>
 			{/if}
 		{:else}

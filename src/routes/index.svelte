@@ -98,7 +98,7 @@
 			wantedHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.averageSale !== null).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
 
 			// Get coomon with the lowest lowestAsk and lowestAsk > 0
-			leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
+			leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk !== null && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 			
 			// Get platinum with the lowest lowestAsk and lowestAsk !== null
 			leastPlatinum = data.filter((card: any) => card.slug.includes("platinium") && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
