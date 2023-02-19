@@ -98,14 +98,15 @@
 			wantedHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.averageSale !== null).sort((a: any, b: any) => b.averageSale - a.averageSale)[0];
 
 			// Get coomon with the lowest lowestAsk and lowestAsk > 0
-			leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk !== null && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
+			/*leastCommon = data.filter((card: any) => card.isCommon && card.lowestAsk !== null && card.lowestAsk > 0).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 			
 			// Get platinum with the lowest lowestAsk and lowestAsk !== null
 			leastPlatinum = data.filter((card: any) => card.slug.includes("platinium") && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
 		
 			// Get halloween with the lowest lowestAsk and lowestAsk !== null
 			leastHalloween = data.filter((card: any) => card.slug.includes("halloween") && card.lowestAsk !== null).sort((a: any, b: any) => a.lowestAsk - b.lowestAsk)[0];
-			
+			*/
+
 			loadingCards = false;
 		});
 
@@ -297,12 +298,12 @@
 					</div>
 					<div class="divider lg:divider-horizontal divider-vertical"></div>
 					<div transition:slide class="flex flex-col space-y-2 w-full">
-						<p class="font-semibold text-white"><Translation id="least_expensive"/></p>
+						<!-- <p class="font-semibold text-white"><Translation id="least_expensive"/></p>
 						<div class="flex flex-row items-center justify-center space-x-7 w-full overflow-x-auto">
 							<Card card={leastCommon} market={true} />
 							<Card card={leastPlatinum}  market={true} />
 							<Card card={leastHalloween} market={true} />
-						</div>
+						</div> -->
 					</div>
 				{/if}
 			</div>
