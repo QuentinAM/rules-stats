@@ -28,7 +28,7 @@
 	<a href={`https://rules.art/card/${card.slug}`} target="_blank"><img src={card.pictureUrl} loading="lazy" class="lg:h-48 md:h-40 h-32 img rounded-xl cursor-pointer" alt="Movie" /></a>
 	<div class="flex flex-col justify-center items-center lg:text-sm text-xs">
 		<div class="flex flex-row items-center space-x-2">
-			<h2 class="font-semibold text-slate-200">{card.artist.displayName}</h2>
+			<h2 class="font-semibold text-slate-200">{card.artistName}</h2>
 			{#if card.slug.includes('halloween')}
 				<div class="badge bg-orange-400 text-black">Halloween</div>
 			{:else if card.isCommon}

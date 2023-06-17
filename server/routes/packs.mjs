@@ -18,10 +18,8 @@ export default function GetPacks(slug) {
                         allClassicPacks{
                                 nodes{
                                 slug,
-								maxSupply,
 								cardsPerPack,
 								supply,
-								releaseDate,
 								season,
 								availableQuantity,
 								description,

@@ -16,10 +16,8 @@ export default function GetPack(slug) {
 				query: `
                     query{
                         pack(slug: "${slug}"){
-                            maxSupply,
                             cardsPerPack,
                             supply,
-                            releaseDate,
                             season,
                             availableQuantity,
                             description,

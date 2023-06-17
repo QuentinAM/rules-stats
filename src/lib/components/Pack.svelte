@@ -29,7 +29,7 @@
         </div>
     {/if} -->
     <p class="break-words">{pack.description}</p>
-    <p class="italic"><Translation id="released_on"/> {new Date(pack.releaseDate).toLocaleDateString('FR')}</p>
+    <!-- <p class="italic"><Translation id="released_on"/> {new Date(pack.releaseDate).toLocaleDateString('FR')}</p> -->
 </div>
 
 <style>

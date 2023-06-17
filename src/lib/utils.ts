@@ -5,7 +5,7 @@ export function CalculateNumberOfArtists(cards: any)
 
     for (let i = 0; i < cards.length; i++)
     {
-        if (cards[i].slug.includes("halloween") && !ArtistInList(cards, cards[i].artist.displayName, cards[i].slug))
+        if (cards[i].slug.includes("halloween") && !ArtistInList(cards, cards[i].artistName, cards[i].slug))
         {
             halloween_count++;
         }
@@ -22,7 +22,7 @@ function ArtistInList(cards: any, displayName: string, slug: string)
 {
     for (let i = 0; i < cards.length; i++)
     {
-        if (cards[i].artist.displayName === displayName && cards[i].slug !== slug)
+        if (cards[i].artistName === displayName && cards[i].slug !== slug)
         {
             return true;
         }
